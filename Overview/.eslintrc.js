@@ -4,22 +4,8 @@ module.exports = {
         "es6": true,
         "node": true
     },
-    "extends": "eslint:recommended",
-    "parserOptions": {
-        "ecmaFeatures": {
-            "experimentalObjectRestSpread": true,
-            "jsx": true
-        },
-        "sourceType": "module"
-    },
-    "plugins": [
-        "react"
-    ],
-    "rules": {
-        "indent": [
-            "error",
-            "tab"
-        ],
+    "extends": "eslint:recommended",    
+    "rules": {        
         "linebreak-style": [
             "error",
             "windows"
@@ -33,6 +19,7 @@ module.exports = {
             "always"
         ],
         "no-console": 0,
-        "eqeqeq": 2
+        "eqeqeq": 2,
+        "no-unused-vars": 0
     }
 };
