@@ -1,20 +1,42 @@
 'use strict';
 
+const mongodb = require('mongodb');
+const MongoClient = mongodb.MongoClient;
 
-// Get a connection string
-const mongoDbConnectionString = 'mongodb://localhost:27017/computers';
+const protocol = 'mongodb:/';
+const server = 'localhost:27017';
+const databaseName = 'Students';
 
-// Get a pending connection to the database server
-const mongoose = require('mongoose');
-mongoose.connect(mongoDbConnectionString);
+const connectionString = `${protocol}/${server}/${databaseName}`;
+const connectionPromise = MongoClient.connect(connectionString);
 
-// Get notified for the connection status
-const db = mongoose.connection;
+MongoClient.connect(connectionString)
+.then((db) => {
+    db.collection('Tatatatatatata')
+        .insert({
+            firstName: 'Ivan',
+            lastName: 'Kolev',
+            age: 22
+        })
+        .then((result) => {
+            console.log(result);
+        });
+})
+.catch((error) => {
+    console.log(error);
+})
 
-db.on('error', (err) => {
-    console.log('Connection failed!\n' + err);
+connectionPromise.then((db) => {
+    return db;
+}).then((db) => {
+    db.collection('Names')
+        .find({})
+        .toArray()
+        .then((err, result) => {
+            console.log(result);
+        });
 });
 
-db.on('open', () => {
-    console.log('Connection successfully established!');
-});
+// connectionPromise.then((db) => {
+//     console.log(db);
+// });
